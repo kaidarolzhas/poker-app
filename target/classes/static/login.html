@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="loginApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Login / Signup</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/angular/angular.min.js"></script>
+</head>
+<body ng-controller="loginController">
+
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card p-4">
+        <h2 class="mb-4">{{ isLogin ? 'Login' : 'Signup' }}</h2>
+
+        <div class="alert alert-warning" ng-if="loginError">Invalid credentials</div>
+        <form ng-submit="handleSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" ng-model="username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" ng-attr-placeholder="{{ isLogin ? 'Password' : 'Create password' }}" ng-model="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                {{ isLogin ? 'Login' : 'Signup' }}
+            </button>
+        </form>
+
+        <div class="mt-3 text-center">
+            <span ng-if="isLogin">
+                Don't have an account?
+                <a href="/signup.html" >Signup</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const app = angular.module('loginApp', []);
+    app.controller('loginController', function($scope, $http) {
+        $scope.isLogin = true;
+        $scope.loginError = false;
+        $scope.username = '';
+        $scope.password = '';
+
+        $scope.handleSubmit = function() {
+            const endpoint = $scope.isLogin ? '/login' : '/signup';
+            const payload = {
+                username: $scope.username,
+                password: $scope.password
+            };
+
+            $http.post(endpoint, payload).then(function(response) {
+                // Успешный вход или регистрация
+                window.location.href = "index.html?username=" + encodeURIComponent($scope.username);
+            }, function(error) {
+                $scope.loginError = true;
+            });
+        };
+    });
+</script>
+
+</body>
+</html>

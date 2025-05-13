@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: poker_kz
+  datasource:
+    url: jdbc:postgresql://localhost:5432/poker_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+jwt:
+  secret-key: c518a002b3d27e2a435e58ff55b2e8a6b7ddec19ef6b1f8c800b12afdadafd87ab8830c53c5417124ae7f0105904e7b81823e78d61f8e68641a13bc2b27ea03f5c77f2fff17eb10eed65858fc521178cdd2325d500a86a673a2b54a6412fa71c50de0461ec7ba3071f6864d5088566ecd092e5be03903b3e115815c3361f2b04d804de547486aec61bcd7c4676bf88738dfdfe89b0ac0f7fd715358349828b147c741671e18a77032f09abe3b1bb4feb8e60e97b5bfbe65e56d69c1aa5f3f6d1799618057197ab030a8dee1faf943dd66aa62bddc191374a364a5e7b3a9cd2a04386f36ca808f7b8e26b1225f7159cbd463eb3aacee5b1f0bc3b8426026b2ef7
+server:
+  port: 8080
